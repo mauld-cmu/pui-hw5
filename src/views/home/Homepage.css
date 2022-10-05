@@ -1,0 +1,30 @@
+#logo {
+  margin: 30px;
+}
+
+/* Header Styling */
+header {
+  display: flex;
+}
+
+#header-text {
+  flex: auto;
+}
+
+header hr {
+  border: 3px solid black;
+}
+
+h1 {
+  margin-top: 60px;
+  font-weight: 100;
+  font-size: 40px;
+}
+
+/* Grid Styling */
+#product-grid {
+  margin: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+}
