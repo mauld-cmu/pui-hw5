@@ -10,6 +10,10 @@ class NavBar extends Component {
     };
   }
 
+  toggleParentCart = (event) => {
+    this.props.toggleCart();
+  }
+
   render() {
     return (
       <nav>
@@ -17,10 +21,8 @@ class NavBar extends Component {
           <span>PRODUCTS</span>
         </div>
         <div id="cart-nav">
-          <span>CART</span>
-          <p id="cart-count">{this.props.cartAmount}</p>
-          <p id="cart-price">{this.props.cartTotal}</p>
-          <CartPopup 
+          <span onClick={this.toggleParentCart}>CART</span>
+          <CartPopup
             currentRoll={this.props.currentRoll}
             priceFormatter={this.props.priceFormatter}
             showCartPopup={this.props.showCartPopup}

@@ -34,6 +34,7 @@ class Homepage extends Component {
       cart: [],
       cartAmount: "0 items",
       cartTotal: "Total: $0.00",
+      showCart: false,
       showCartPopup: false
     };
     // For Roll
@@ -44,6 +45,8 @@ class Homepage extends Component {
     this.displayCartTotal = this.displayCartTotal.bind(this);
     // For CartPopup
     this.closePopup = this.closePopup.bind(this);
+    // For Cart
+    this.toggleCart = this.toggleCart.bind(this);
   }
 
   // Formats Floats into USD
@@ -86,6 +89,20 @@ class Homepage extends Component {
     })
   }
 
+  // If showCart is true, set it to false - if false, set to true
+  toggleCart() {
+    console.log("TOGGLING!");
+    if (this.state.showCart === true) {
+      this.setState({
+        showCart: false
+      })
+    } else {
+      this.setState({
+        showCart: true
+      })
+    }
+  }
+
   // Creates a string displaying how many Rolls are in the cart array
   displayCartAmount() {
     if (this.state.cart.length === 0 || this.state.cart.length > 1) {
@@ -126,17 +143,18 @@ class Homepage extends Component {
           <img id="logo" src={logo} alt="Bun Bun Bake Shop logo with text" width="400" />
           <div id="header-text">
             <NavBar 
-              cartAmount={this.state.cartAmount}
-              cartTotal={this.state.cartTotal}
               currentRoll={this.state.currentRoll}
               priceFormatter={this.priceFormatter}
               showCartPopup={this.state.showCartPopup}
+              toggleCart={this.toggleCart}
             />
             <hr/>
             <h1>Our hand-made cinnamon rolls</h1>
           </div>
         </header>
-        <Cart/>
+        { this.state.showCart &&
+          <Cart/>
+        }
         <div id="product-grid">
           {gridItems}
         </div>
