@@ -4,9 +4,13 @@ hr {
 
 #cart-contents {
   margin: 20px 10%;
+  font-size: 25px;
 }
 
 #empty-cart-msg {
   text-align: center;
-  font-size: 30px;
+}
+
+#item-total {
+  float: right;
 }

@@ -91,7 +91,6 @@ class Homepage extends Component {
 
   // If showCart is true, set it to false - if false, set to true
   toggleCart() {
-    console.log("TOGGLING!");
     if (this.state.showCart === true) {
       this.setState({
         showCart: false
@@ -153,7 +152,11 @@ class Homepage extends Component {
           </div>
         </header>
         { this.state.showCart &&
-          <Cart/>
+          <Cart
+            cart={this.state.cart}
+            cartAmountDisplay={this.displayCartAmount()}
+            cartTotalDisplay={this.displayCartTotal()}
+          />
         }
         <div id="product-grid">
           {gridItems}
