@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './Homepage.css';
 import logo from './logo-01.svg';
 import NavBar from '../../components/NavBar';
-import Roll from '../../components/Roll';
+import Cart from '../../components/Cart';
+import RollCard from '../../components/RollCard';
 
 //Contains all the data needed to populate Roll grid
 const rollData = {
@@ -182,7 +183,7 @@ class Homepage extends Component {
 
     Object.keys(rollData).forEach((key) => {
       gridItems.push(
-        <Roll
+        <RollCard
           key={key}
           rollKey={key}
           rollDatum={rollData[key]}
@@ -192,6 +193,7 @@ class Homepage extends Component {
         />
       );
     });
+
     return (
       <div className="homepage">
         <header>
@@ -208,6 +210,7 @@ class Homepage extends Component {
             <h1>Our hand-made cinnamon rolls</h1>
           </div>
         </header>
+        <Cart/>
         <div id="product-grid">
           {gridItems}
         </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Roll.css';
+import './RollCard.css';
 
-class Roll extends Component {
+class RollCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -77,4 +77,4 @@ class Roll extends Component {
   }
 }
  
-export default Roll;
+export default RollCard;

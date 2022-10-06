@@ -1,0 +1,12 @@
+hr {
+  border: 8px solid #7b6666;
+}
+
+#cart-contents {
+  margin: 20px 10%;
+}
+
+#empty-cart-msg {
+  text-align: center;
+  font-size: 30px;
+}
