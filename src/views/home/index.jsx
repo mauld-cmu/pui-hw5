@@ -4,97 +4,22 @@ import logo from './logo-01.svg';
 import NavBar from '../../components/NavBar';
 import Cart from '../../components/Cart';
 import RollCard from '../../components/RollCard';
-
-//Contains all the data needed to populate Roll grid
-const rollData = {
-  "original": {
-    displayName: "Original cinnamon roll",
-    imageURL: "/assets/original-cinnamon-roll.jpg",
-    imageAlt: "Photo of original flavor cinnamon roll",
-    basePrice: 2.49,
-  },
-  "apple": {
-    displayName: "Apple cinnamon roll",
-    imageURL: "/assets/apple-cinnamon-roll.jpg",
-    imageAlt: "Photo of apple flavored cinnamon roll",
-    basePrice: 3.49,
-  },
-  "raisin": {
-    displayName: "Raisin cinnamon roll",
-    imageURL: "/assets/raisin-cinnamon-roll.jpg",
-    imageAlt: "Photo of raisin flavored cinnamon roll",
-    basePrice: 2.99,
-  },
-  "walnut": {
-    displayName: "Walnut cinnamon roll",
-    imageURL: "/assets/walnut-cinnamon-roll.jpg",
-    imageAlt: "Photo of walnut flavored cinnamon roll",
-    basePrice: 3.49,
-  }, 
-  "chocolate": {
-    displayName: "Double-chocolate cinnamon roll",
-    imageURL: "/assets/double-chocolate-cinnamon-roll.jpg",
-    imageAlt: "Photo of double chocolate flavored cinnamon roll",
-    basePrice: 3.99,
-  },
-  "strawberry": {
-    name: "strawberry",
-    displayName: "Strawberry cinnamon roll",
-    imageURL: "/assets/strawberry-cinnamon-roll.jpg",
-    imageAlt: "Photo of Strawberry flavored cinnamon roll",
-    basePrice: 3.99,
-  }
-}
-
-const glazingData = {
-  "keepOriginal": {
-    price: 0.00,
-    displayName: "Keep original"
-  },
-  "sugarMilk": {
-    price: 0.00,
-    displayName: "Sugar milk"
-  },
-  "vanillaMilk": {
-    price: 0.50,
-    displayName: "Vanilla milk"
-  },
-  "doubleChocolate": {
-    price: 1.50,
-    displayName: "Double chocolate"
-  }
-}
-
-const packData = {
-  "onePack": {
-    priceMultiplier: 1,
-    displayNumber: 1
-  },
-  "threePack": {
-    priceMultiplier: 3,
-    displayNumber: 3
-  },
-  "sixPack": {
-    priceMultiplier: 5,
-    displayNumber: 6
-  },
-  "twelvePack": {
-    priceMultiplier: 10,
-    displayNumber: 12
-  }
-}
+import { rollData, glazingData, packData } from '../../data/ShopData';
 
 class RollObj {
   constructor(name, glaze, packSize) {
     // types can be "original", "apple", "raisin", "walnut", "chocolate", or "strawberry"
     this.name = name;
     this.displayName = rollData[this.name].displayName;
+
     // glazing can be "keepOriginal", "sugarMilk", "vanillaMilk", "doubleChocolate"
     this.glaze = glaze;
     this.glazeName = glazingData[this.glaze].displayName;
+
     // packSize can be "onePack", "threePack", "sixPack", or "twelvePack"
     this.packSize = packSize;
     this.packSizeName = packData[this.packSize].displayNumber;
+    
     // calculates price 
     this.price = (rollData[this.name].basePrice + glazingData[this.glaze].price) * packData[this.packSize].priceMultiplier;
   }
@@ -102,6 +27,7 @@ class RollObj {
 
 class Homepage extends Component {
   constructor(props) {
+    console.log(rollData);
     super(props);
     this.state = {
       currentRoll: new RollObj('original', 'keepOriginal', 'onePack'),
