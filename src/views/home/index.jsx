@@ -35,7 +35,9 @@ class Homepage extends Component {
       cartAmount: "0 items",
       cartTotal: "Total: $0.00",
       showCart: false,
-      showCartPopup: false
+      showCartPopup: false,
+      sortCriteria: 'Base Price',
+      filterCriteria: ''
     };
     // For Roll
     this.addToCart = this.addToCart.bind(this);
@@ -47,6 +49,10 @@ class Homepage extends Component {
     this.closePopup = this.closePopup.bind(this);
     // For Cart
     this.toggleCart = this.toggleCart.bind(this);
+    // For Search & Filter
+    this.clickSearch = this.clickSearch.bind(this);
+    this.sortProducts = this.sortProducts.bind(this);
+    this.filterProducts = this.filterProducts.bind(this);
   }
 
   // Formats Floats into USD
@@ -119,6 +125,18 @@ class Homepage extends Component {
     return "Total: " + this.priceFormatter(totalPrice);
   }
 
+  clickSearch() {
+    console.log("CLICK SEARCH")
+  }
+
+  sortProducts = (event) => {
+    console.log("SORTING BY:", event.target.value)
+  }
+
+  filterProducts = (event) => {
+    console.log("FILTERING BY:", event.target.value)
+  }
+
   render() { 
     // Loops through the rollData list, passes props to Roll Components
     const gridItems = [];
@@ -151,7 +169,11 @@ class Homepage extends Component {
             <h1>Our hand-made cinnamon rolls</h1>
           </div>
         </header>
-        <SearchSortBar/>
+        <SearchSortBar
+          clickSearch={this.clickSearch}
+          sortProducts={this.sortProducts}
+          filterProducts={this.filterProducts}
+        />
         { this.state.showCart &&
           <Cart
             cart={this.state.cart}
