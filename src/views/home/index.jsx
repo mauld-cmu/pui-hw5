@@ -57,7 +57,7 @@ class Homepage extends Component {
     showCart: false,
     showCartPopup: false,
     sortCriteria: 'Base Price',
-    filterCriteria: ''
+    filterQuery: ''
   };
 
   // Formats Floats into USD
@@ -150,21 +150,26 @@ class Homepage extends Component {
   removeFromCartByIndex(index) {
     if (this.state.cart.length >= 1) { // Ensure cart is not empty
       this.setState({
-        state: this.state.cart.splice(index, 1)
+        cart: this.state.cart.filter((data, i) => i !== index)
       })
     }
   }
 
   clickSearch() {
     console.log("CLICK SEARCH")
+    console.log("FILTERING BY:", this.state.filterQuery);
   }
 
   sortProducts = (event) => {
-    console.log("SORTING BY:", event.target.value)
+    this.setState({
+      sortCriteria: event.target.value
+    })
   }
 
   filterProducts = (event) => {
-    console.log("FILTERING BY:", event.target.value)
+    this.setState({
+      filterQuery: event.target.value
+    })
   }
 
   render() { 
