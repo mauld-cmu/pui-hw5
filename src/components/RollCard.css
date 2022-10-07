@@ -96,11 +96,6 @@ select:hover {
   top: -20px;
 }
 
-/* Visually differentiates selected button */
-.row-pack input:checked + span {
-  background-color: lightgray;
-}
-
 /* Product Card Price & Button */
 /* I used http://howtocenterincss.com to help here! */
 .row-cart {

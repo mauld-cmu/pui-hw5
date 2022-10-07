@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import './RollCard.css';
+import { glazingData, packData } from '../data/ShopData';
 
 class RollCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      targetRoll: this.props.createRoll(this.props.rollKey, 'keepOriginal', 'onePack')
+      glazing: "keepOriginal",
+      packSize: "onePack",
+      price: this.props.rollDatum.basePrice
     };
   }
 
@@ -13,19 +16,25 @@ class RollCard extends Component {
   pullFormData = (event) => {
     if (event.target.type === 'radio') {
       this.setState(prevState => ({
-        targetRoll: this.props.createRoll(prevState.targetRoll.name, prevState.targetRoll.glaze, event.target.value)
+        ...prevState,
+        packSize: event.target.value,
+        price: (this.props.rollDatum.basePrice + glazingData[prevState.glazing].price)*packData[event.target.value].priceMultiplier
       }))
     }
     if (event.target.type === 'select-one') {
       this.setState(prevState => ({
-        targetRoll: this.props.createRoll(prevState.targetRoll.name, event.target.value, prevState.targetRoll.packSize)
+        ...prevState,
+        glazing: event.target.value,
+        price: (this.props.rollDatum.basePrice + glazingData[event.target.value].price) * packData[prevState.packSize].priceMultiplier
       }))
     }
   }
 
   // Tells the parent to add the Roll Component's Roll to the cart
   addToParentCart = (event) => {
-    this.props.addToCart(this.state.targetRoll);
+    this.props.addToCart(
+      this.props.createRoll(this.props.rollKey, this.state.glazing, this.state.packSize)
+    );
   }
 
   render() { 
@@ -50,26 +59,26 @@ class RollCard extends Component {
             <div>
               <label>
                 <input type="radio" value="onePack" name="pack" defaultChecked/>
-                  <span>1</span>
+                <span style={{ backgroundColor: this.state.packSize === 'onePack' ? 'lightgray' : 'white' }}>1</span>
               </label>
               <label>
                 <input type="radio" value="threePack" name="pack"/>
-                  <span>3</span>
+                <span style={{ backgroundColor: this.state.packSize === 'threePack' ? 'lightgray' : 'white' }}>3</span>
               </label>
               <label>
                 <input type="radio" value="sixPack" name="pack"/>
-                  <span>6</span>
+                <span style={{ backgroundColor: this.state.packSize === 'sixPack' ? 'lightgray' : 'white' }}>6</span>
               </label>
               <label>
                 <input type="radio" value="twelvePack" name="pack"/>
-                  <span>12</span>
+                <span style={{ backgroundColor: this.state.packSize === 'twelvePack' ? 'lightgray' : 'white' }}>12</span>
               </label>
             </div>
           </div>
         </form>
 
         <div className="row-cart">
-          <span id="price">{this.props.priceFormatter(this.state.targetRoll.price)}</span>
+          <span id="price">{this.props.priceFormatter(this.state.price)}</span>
           <button id="add-button" onClick={this.addToParentCart}>Add to Cart</button>
         </div>
       </article>
