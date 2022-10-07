@@ -14,3 +14,10 @@ hr {
 #item-total {
   float: right;
 }
+
+/* Cart Grid Styling */
+#cart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+}

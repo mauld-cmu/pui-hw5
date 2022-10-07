@@ -179,6 +179,7 @@ class Homepage extends Component {
             cart={this.state.cart}
             cartAmountDisplay={this.displayCartAmount()}
             cartTotalDisplay={this.displayCartTotal()}
+            priceFormatter={this.priceFormatter}
           />
         }
         <div id="product-grid">
@@ -188,5 +189,5 @@ class Homepage extends Component {
     );
   }
 }
- 
+
 export default Homepage;
