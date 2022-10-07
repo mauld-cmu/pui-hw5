@@ -34,6 +34,8 @@ class Homepage extends Component {
     // For Roll
     this.addToCart = this.addToCart.bind(this);
     this.createRoll = this.createRoll.bind(this);
+    // For Products
+    this.populateProductGrid = this.populateProductGrid.bind(this);
     // For NavBar
     this.displayCartAmount = this.displayCartAmount.bind(this);
     this.displayCartTotal = this.displayCartTotal.bind(this);
@@ -56,6 +58,7 @@ class Homepage extends Component {
     cartTotal: "Total: $0.00",
     showCart: false,
     showCartPopup: false,
+    products: Object.values(rollData),
     sortCriteria: 'Base Price',
     filterQuery: ''
   };
@@ -75,7 +78,7 @@ class Homepage extends Component {
   }
 
   // Adds to cart list, triggers popup, and updates states for Nav Bar
-  addToCart(incomingRoll) {
+  addToCart = (incomingRoll) => {
     this.setState({
       cart: this.state.cart.concat(incomingRoll)
     })
@@ -93,6 +96,19 @@ class Homepage extends Component {
     });
     
     setTimeout(this.closePopup, 3000);
+  }
+
+  populateProductGrid() {
+    return this.state.products.map(roll =>
+      <RollCard
+        key={roll.id}
+        rollKey={roll.id}
+        rollDatum={rollData[roll.id]}
+        priceFormatter={this.priceFormatter}
+        createRoll={this.createRoll}
+        addToCart={this.addToCart}
+      />
+    )
   }
 
   // Closes popup after 3 seconds
@@ -156,39 +172,29 @@ class Homepage extends Component {
   }
 
   clickSearch() {
-    console.log("CLICK SEARCH")
-    console.log("FILTERING BY:", this.state.filterQuery);
+    this.setState({
+      products: Object.values(rollData).filter((str) => str.displayName.toLowerCase().includes(this.state.filterQuery))
+    })
   }
 
   sortProducts = (event) => {
     this.setState({
       sortCriteria: event.target.value
     })
+    if (event.target.value === 'Name') {
+      this.state.products.sort((a, b) => (a.displayName > b.displayName ? 1 : -1));
+    } else {
+      this.state.products.sort((a, b) => (a.basePrice > b.basePrice ? 1 : -1));
+    }
   }
 
   filterProducts = (event) => {
     this.setState({
-      filterQuery: event.target.value
+      filterQuery: event.target.value.toLowerCase()
     })
   }
 
   render() { 
-    // Loops through the rollData list, passes props to Roll Components
-    const gridItems = [];
-
-    Object.keys(rollData).forEach((key) => {
-      gridItems.push(
-        <RollCard
-          key={key}
-          rollKey={key}
-          rollDatum={rollData[key]}
-          priceFormatter={this.priceFormatter}
-          createRoll={this.createRoll}
-          addToCart={this.addToCart}
-        />
-      );
-    });
-
     return (
       <div className="homepage">
         <header>
@@ -218,9 +224,16 @@ class Homepage extends Component {
             priceFormatter={this.priceFormatter}
           />
         }
-        <div id="product-grid">
-          {gridItems}
-        </div>
+        { this.state.products.length &&
+          <div id="product-grid">
+            {this.populateProductGrid()}
+          </div>
+        }
+        { this.state.products.length === 0 &&
+          <div id="no-match">
+            <p>No Match!</p>
+          </div>
+        }
       </div>
     );
   }

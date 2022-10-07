@@ -28,3 +28,10 @@ h1 {
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
 }
+
+#no-match {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+}
