@@ -8,6 +8,10 @@ class CartCard extends Component {
   }
   state = {  }
 
+  deleteFromCart = (event) => {
+    this.props.removeFromCartByIndex(this.props.index);
+  }
+
   render() { 
     return ( 
       <article className="cart-card">
@@ -19,6 +23,7 @@ class CartCard extends Component {
           <p>Glazing: {this.props.glazeName}</p>
           <p>Pack Size: {this.props.packSizeName} </p>
           <p className="cart-price">{this.props.priceString}</p>
+          <button className="remove-button" onClick={this.deleteFromCart}>Remove</button>
         </div>
       </article>
     );

@@ -3,6 +3,7 @@ import './Homepage.css';
 import logo from './logo-01.svg';
 import NavBar from '../../components/NavBar';
 import Cart from '../../components/Cart';
+import CartCard from '../../components/CartCard';
 import SearchSortBar from '../../components/SearchSortBar'
 import RollCard from '../../components/RollCard';
 import { rollData, glazingData, packData } from '../../data/ShopData';
@@ -29,16 +30,7 @@ class RollObj {
 class Homepage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentRoll: new RollObj('original', 'keepOriginal', 'onePack'),
-      cart: [],
-      cartAmount: "0 items",
-      cartTotal: "Total: $0.00",
-      showCart: false,
-      showCartPopup: false,
-      sortCriteria: 'Base Price',
-      filterCriteria: ''
-    };
+
     // For Roll
     this.addToCart = this.addToCart.bind(this);
     this.createRoll = this.createRoll.bind(this);
@@ -49,11 +41,24 @@ class Homepage extends Component {
     this.closePopup = this.closePopup.bind(this);
     // For Cart
     this.toggleCart = this.toggleCart.bind(this);
+    this.populateCartGrid = this.populateCartGrid.bind(this);
+    this.removeFromCartByIndex = this.removeFromCartByIndex.bind(this);
     // For Search & Filter
     this.clickSearch = this.clickSearch.bind(this);
     this.sortProducts = this.sortProducts.bind(this);
     this.filterProducts = this.filterProducts.bind(this);
   }
+
+  state = {
+    currentRoll: new RollObj('original', 'keepOriginal', 'onePack'),
+    cart: [],
+    cartAmount: "0 items",
+    cartTotal: "Total: $0.00",
+    showCart: false,
+    showCartPopup: false,
+    sortCriteria: 'Base Price',
+    filterCriteria: ''
+  };
 
   // Formats Floats into USD
   priceFormatter(unformattedPrice) {
@@ -71,7 +76,9 @@ class Homepage extends Component {
 
   // Adds to cart list, triggers popup, and updates states for Nav Bar
   addToCart(incomingRoll) {
-    this.state.cart.push(incomingRoll);
+    this.setState({
+      cart: this.state.cart.concat(incomingRoll)
+    })
     this.setState({
       currentRoll: incomingRoll
     });
@@ -123,6 +130,29 @@ class Homepage extends Component {
       return sum + roll.price;
     }, 0);
     return "Total: " + this.priceFormatter(totalPrice);
+  }
+
+  populateCartGrid() {
+    return this.state.cart.map((roll, index) =>
+      <CartCard
+        key={index}
+        index={index}
+        name={roll.name}
+        displayName={roll.displayName}
+        glazeName={roll.glazeName}
+        packSizeName={roll.packSizeName}
+        priceString={this.priceFormatter(roll.price)}
+        removeFromCartByIndex={this.removeFromCartByIndex}
+      />
+    )
+  }
+
+  removeFromCartByIndex(index) {
+    if (this.state.cart.length >= 1) { // Ensure cart is not empty
+      this.setState({
+        state: this.state.cart.splice(index, 1)
+      })
+    }
   }
 
   clickSearch() {
@@ -179,6 +209,7 @@ class Homepage extends Component {
             cart={this.state.cart}
             cartAmountDisplay={this.displayCartAmount()}
             cartTotalDisplay={this.displayCartTotal()}
+            populateCartGrid={this.populateCartGrid}
             priceFormatter={this.priceFormatter}
           />
         }
