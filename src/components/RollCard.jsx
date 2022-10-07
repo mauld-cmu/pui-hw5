@@ -5,12 +5,13 @@ import { glazingData, packData } from '../data/ShopData';
 class RollCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      glazing: "keepOriginal",
-      packSize: "onePack",
-      price: this.props.rollDatum.basePrice
-    };
   }
+
+  state = {
+    glazing: "keepOriginal",
+    packSize: "onePack",
+    price: this.props.rollDatum.basePrice
+  };
 
   // Gets data from the forms, creates a roll Object and updates state
   pullFormData = (event) => {

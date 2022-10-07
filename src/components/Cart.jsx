@@ -16,7 +16,7 @@ class Cart extends Component {
               <span id="item-count">Shopping Cart ({this.props.cartAmountDisplay})</span>
               <span id="item-total">{this.props.cartTotalDisplay}</span>
               <div id="cart-grid">
-                  { this.props.populateCartGrid() }
+                { this.props.populateCartGrid() }
               </div>
             </div>
           }

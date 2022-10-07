@@ -6,7 +6,6 @@ class CartCard extends Component {
   constructor(props) {
     super(props);
   }
-  state = {  }
 
   deleteFromCart = (event) => {
     this.props.removeFromCartByIndex(this.props.index);

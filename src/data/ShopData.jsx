@@ -44,6 +44,7 @@ export const rollData = {
   }
 }
 
+// Contains prices of glazings
 export const glazingData = {
   "keepOriginal": {
     price: 0.00,
@@ -63,6 +64,7 @@ export const glazingData = {
   }
 }
 
+// Contains multipliers for pack sizes
 export const packData = {
   "onePack": {
     priceMultiplier: 1,

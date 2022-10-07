@@ -52,15 +52,16 @@ class Homepage extends Component {
   }
 
   state = {
-    currentRoll: new RollObj('original', 'keepOriginal', 'onePack'),
-    cart: [],
+    // Stores the roll most recently added to cart - used for the cart popup
+    currentRoll: new RollObj('original', 'keepOriginal', 'onePack'), 
+    products: Object.values(rollData), // Contains listings for products
+    cart: [], // Contains elements in the cart
     cartAmount: "0 items",
     cartTotal: "Total: $0.00",
     showCart: false,
     showCartPopup: false,
-    products: Object.values(rollData),
-    sortCriteria: 'Base Price',
-    filterQuery: ''
+    sortCriteria: 'Base Price', // Criteria for Sorting (Base Price or Name)
+    filterQuery: '' // Criteria for filtering (Nothing by default)
   };
 
   // Formats Floats into USD
@@ -98,6 +99,7 @@ class Homepage extends Component {
     setTimeout(this.closePopup, 3000);
   }
 
+  // Populates the Grid of Products
   populateProductGrid() {
     return this.state.products.map(roll =>
       <RollCard
@@ -148,6 +150,7 @@ class Homepage extends Component {
     return "Total: " + this.priceFormatter(totalPrice);
   }
 
+  // Populates the grid of CartCards
   populateCartGrid() {
     return this.state.cart.map((roll, index) =>
       <CartCard
@@ -163,6 +166,7 @@ class Homepage extends Component {
     )
   }
 
+  // Removes an element from the cart given an index - passed to Cart & CartCard
   removeFromCartByIndex(index) {
     if (this.state.cart.length >= 1) { // Ensure cart is not empty
       this.setState({
@@ -171,12 +175,14 @@ class Homepage extends Component {
     }
   }
 
+  // Handles action when search button is actually pressed
   clickSearch() {
     this.setState({
       products: Object.values(rollData).filter((str) => str.displayName.toLowerCase().includes(this.state.filterQuery))
     })
   }
 
+  // Pulls data from filter and assigns choice to state - passed to SearchSortBar
   sortProducts = (event) => {
     this.setState({
       sortCriteria: event.target.value
@@ -188,6 +194,7 @@ class Homepage extends Component {
     }
   }
 
+  // Pulls data from search and assigns query to state - passed to SearchSortBar
   filterProducts = (event) => {
     this.setState({
       filterQuery: event.target.value.toLowerCase()
@@ -224,7 +231,7 @@ class Homepage extends Component {
             priceFormatter={this.priceFormatter}
           />
         }
-        { this.state.products.length &&
+        { this.state.products.length > 0 &&
           <div id="product-grid">
             {this.populateProductGrid()}
           </div>
