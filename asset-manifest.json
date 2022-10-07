@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/pui-hw5/static/css/main.1840aedd.css",
-    "main.js": "/pui-hw5/static/js/main.7aebc324.js",
+    "main.css": "/pui-hw5/static/css/main.6e14e177.css",
+    "main.js": "/pui-hw5/static/js/main.7400077e.js",
     "static/js/787.8936b528.chunk.js": "/pui-hw5/static/js/787.8936b528.chunk.js",
     "static/media/logo-01.svg": "/pui-hw5/static/media/logo-01.b2f9cdda6d5cda1ce2ffc47e6b747dd4.svg",
     "index.html": "/pui-hw5/index.html",
-    "main.1840aedd.css.map": "/pui-hw5/static/css/main.1840aedd.css.map",
-    "main.7aebc324.js.map": "/pui-hw5/static/js/main.7aebc324.js.map",
+    "main.6e14e177.css.map": "/pui-hw5/static/css/main.6e14e177.css.map",
+    "main.7400077e.js.map": "/pui-hw5/static/js/main.7400077e.js.map",
     "787.8936b528.chunk.js.map": "/pui-hw5/static/js/787.8936b528.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1840aedd.css",
-    "static/js/main.7aebc324.js"
+    "static/css/main.6e14e177.css",
+    "static/js/main.7400077e.js"
   ]
 }
