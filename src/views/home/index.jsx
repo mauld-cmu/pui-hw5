@@ -3,6 +3,7 @@ import './Homepage.css';
 import logo from './logo-01.svg';
 import NavBar from '../../components/NavBar';
 import Cart from '../../components/Cart';
+import SearchSortBar from '../../components/SearchSortBar'
 import RollCard from '../../components/RollCard';
 import { rollData, glazingData, packData } from '../../data/ShopData';
 
@@ -27,7 +28,6 @@ class RollObj {
 
 class Homepage extends Component {
   constructor(props) {
-    console.log(rollData);
     super(props);
     this.state = {
       currentRoll: new RollObj('original', 'keepOriginal', 'onePack'),
@@ -151,6 +151,7 @@ class Homepage extends Component {
             <h1>Our hand-made cinnamon rolls</h1>
           </div>
         </header>
+        <SearchSortBar/>
         { this.state.showCart &&
           <Cart
             cart={this.state.cart}

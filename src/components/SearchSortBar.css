@@ -1,0 +1,28 @@
+#bar {
+  margin: 20px 100px;
+}
+
+input {
+  font: inherit;
+  font-size: 20px;
+  border: 1px solid gray;
+}
+
+button {
+  font: inherit;
+  font-size: 20px;
+  border: 1px solid gray;
+}
+
+button:hover {
+  background-color: yellow;
+  cursor: pointer;
+}
+
+#sort-by {
+  padding-left: 20px;
+}
+
+select {
+  height: 35px;
+}

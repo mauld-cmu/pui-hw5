@@ -59,8 +59,8 @@ select:hover {
 }
 
 /* Radio button styling based on this stackoverflow thread: 
-   https://stackoverflow.com/questions/5523735/how-to-make-a-radio-button-look-like-a-toggle-button
-   particularly the response by Simon Darby.
+  https://stackoverflow.com/questions/5523735/how-to-make-a-radio-button-look-like-a-toggle-button
+  particularly the response by Simon Darby.
 */
 .row-pack {
   display: flex;
@@ -111,7 +111,7 @@ select:hover {
   align-items: center;
 }
 
-button {
+.row-cart button {
   width: 160px;
   font-family: inherit;
   font-size: 20px;
@@ -120,7 +120,7 @@ button {
   padding: 5px 15px;
 }
 
-button:hover {
+.row-cart button:hover {
   background-color: yellow;
   cursor: pointer;
 }

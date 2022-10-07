@@ -70,11 +70,11 @@ class RollCard extends Component {
 
         <div className="row-cart">
           <span id="price">{this.props.priceFormatter(this.state.targetRoll.price)}</span>
-          <button onClick={this.addToParentCart}>Add to Cart</button>
+          <button id="add-button" onClick={this.addToParentCart}>Add to Cart</button>
         </div>
       </article>
     );
   }
 }
- 
+
 export default RollCard;
